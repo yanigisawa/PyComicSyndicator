@@ -7,7 +7,6 @@ class PennyArcadeParser(SGMLParser):
 		self.comicFound = False
 	def start_img(self, attrs):
 		src = ""
-		alt = ""
 		if self.comicFound:
 			return
 		for k, v in attrs:
@@ -19,5 +18,6 @@ class PennyArcadeParser(SGMLParser):
 				
 	def getImageLocation(self, html):
 		self.feed(html)
+		self.close()
 		return self.img
 		
