@@ -2,6 +2,7 @@ import goComicsParser, mechanize, htmlFetch, PyRSS2Gen, datetime
 import comicsComParser, sluggyParser, cadParser, userFriendlyParser
 import pennyArcadeParser
 import ftplib
+import datetime
 
 class Comic:
 	def __init__(self, name, url, parser):
@@ -37,7 +38,9 @@ class ComicDownload:
 			html = htmlFetch.GetHtml(comic.url)
 			comic.imageUrl = comic.parser.getImageLocation(html)
 			desc = "<img src=\"" + comic.imageUrl + "\" />"
-			rssItems.append(PyRSS2Gen.RSSItem(title = comic.name, link = comic.imageUrl, description = desc))
+			rssItems.append(PyRSS2Gen.RSSItem(title = comic.name, link = comic.url, 
+				description = desc,
+				pubDate = datetime.datetime.now()))
 		rss = PyRSS2Gen.RSS2(title = "Comic RSS Feed", link = "http://www.google.com", description = "Personalized feed of comics I Read", items = rssItems)
 		rss.write_xml(open("comicsRss.xml", "w"))
 		return rss
