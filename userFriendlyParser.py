@@ -18,5 +18,6 @@ class UserFriendlyParser(SGMLParser):
 				
 	def getImageLocation(self, html):
 		self.feed(html)
+		self.close()
 		return self.img
 		
