@@ -14,6 +14,8 @@ class Comic:
 
 class ComicDownload:
 	def __init__(self):
+		today = datetime.date.today()
+		ufDate = str(today.year) + str(today.month).zfill(2) + str(today.day).zfill(2)
 		self.allComics = [Comic(name = "Pibgorn", url = "http://www.gocomics.com/pibgorn/", parser = goComicsParser.GoComicsParser()),
 			Comic(name = "Non Sequitur", url = "http://www.gocomics.com/nonsequitur/", parser = goComicsParser.GoComicsParser()), 
 			Comic(name = "For Better Or for Worse", url = "http://www.gocomics.com/forbetterorforworse/", parser = goComicsParser.GoComicsParser()),
@@ -26,7 +28,8 @@ class ComicDownload:
 			Comic(name = "9 Chickweed Lane", url = "http://www.comics.com/9_chickweed_lane/", parser = comicsComParser.ComicsComParser()),
 			Comic(name = "Sluggy", url = "http://www.sluggy.com", parser = sluggyParser.SluggyParser()),
 			Comic(name = "Ctrl+Alt+Delete", url = "http://www.cad-comic.com/cad/", parser = cadParser.CadParser()),
-			Comic(name = "User Friendly", url = "http://ars.userfriendly.org", parser = userFriendlyParser.UserFriendlyParser()),
+			Comic(name = "User Friendly", url = "http://ars.userfriendly.org/cartoons/?id=" + ufDate, 
+				parser = userFriendlyParser.UserFriendlyParser()),
 			Comic(name = "Penny Arcade", url = "http://www.penny-arcade.com/comic/", parser = pennyArcadeParser.PennyArcadeParser())]
 
 	
@@ -37,8 +40,8 @@ class ComicDownload:
 			comic.parser.reset()
 			html = htmlFetch.GetHtml(comic.url)
 			comic.imageUrl = comic.parser.getImageLocation(html)
-			desc = "<img src=\"" + comic.imageUrl + "\" />"
-			rssItems.append(PyRSS2Gen.RSSItem(title = comic.name, link = comic.url, 
+			desc = "<a href=\"" + comic.url + "\" target=\"_blank\">Comic Website</a><br/><br/><img src=\"" + comic.imageUrl + "\" />"
+			rssItems.append(PyRSS2Gen.RSSItem(title = comic.name, link = comic.imageUrl, 
 				description = desc,
 				pubDate = datetime.datetime.now()))
 		rss = PyRSS2Gen.RSS2(title = "Comic RSS Feed", link = "http://www.google.com", description = "Personalized feed of comics I Read", items = rssItems)
@@ -47,14 +50,14 @@ class ComicDownload:
 
 def main():
 	cd = ComicDownload()
-	print 'Generating RSS file'
+	#print 'Generating RSS file'
 	cd.generateRSS()
 	ftp = ftplib.FTP('ftp.jamesralexander.com', 'comicFTP@jamesralexander.com', 'opK5s0fyL0sMerT0ekYK')
 	file = open('comicsRss.xml', 'rb')
-	print 'Uploading file to server'
+	#print 'Uploading file to server'
 	ftp.storbinary('STOR rss.xml', file)
 	file.close()
 	ftp.quit()
-	print 'Exiting Successfully'
+	#print 'Exiting Successfully'
 
 main()
