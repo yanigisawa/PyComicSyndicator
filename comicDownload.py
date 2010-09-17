@@ -52,7 +52,7 @@ def main():
 	cd = ComicDownload()
 	#print 'Generating RSS file'
 	cd.generateRSS()
-	ftp = ftplib.FTP('ftp.jamesralexander.com', 'comicFTP@jamesralexander.com', 'opK5s0fyL0sMerT0ekYK')
+	ftp = ftplib.FTP('<serverConfig>', '<username>', '<password')
 	file = open('comicsRss.xml', 'rb')
 	#print 'Uploading file to server'
 	ftp.storbinary('STOR rss.xml', file)
