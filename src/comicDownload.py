@@ -10,7 +10,6 @@ class Comic:
 		self.imageUrl = ""
 		self.parser = parser
 
-
 class ComicDownload:
 	def __init__(self):
 		today = datetime.date.today()
@@ -40,7 +39,6 @@ class ComicDownload:
 				parser = userFriendlyParser.UserFriendlyParser()),
 			Comic(name = "Penny Arcade", url = "http://www.penny-arcade.com/comic/", 
 				parser = pennyArcadeParser.PennyArcadeParser())]
-
 	
 	def generateRSS(self):
 		#self.fetchImageLocations()
@@ -66,8 +64,6 @@ class ComicDownload:
 
 def main():
 	cd = ComicDownload()
-	#print 'Generating RSS file'
 	cd.generateRSS()
-	#print 'Exiting Successfully'
 
 main()
