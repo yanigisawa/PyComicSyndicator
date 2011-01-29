@@ -21,4 +21,3 @@ class ComicsComParser(SGMLParser):
 		self.feed(html)
 		self.close()
 		return self.img
-		

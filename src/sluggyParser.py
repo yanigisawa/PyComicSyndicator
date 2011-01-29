@@ -20,4 +20,3 @@ class SluggyParser(SGMLParser):
 		self.feed(html)
 		self.close()
 		return "http://www.sluggy.com" + self.img
-		
