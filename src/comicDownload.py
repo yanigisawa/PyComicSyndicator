@@ -1,6 +1,6 @@
 import goComicsParser, mechanize, htmlFetch, PyRSS2Gen, datetime
 import comicsComParser, sluggyParser, cadParser, userFriendlyParser
-import pennyArcadeParser
+import pennyArcadeParser, muttsParser
 import datetime
 
 class Comic:
@@ -33,12 +33,11 @@ class ComicDownload:
 			Comic(name = "Luann", url = "http://www.comics.com/luann/", parser = comicsComParser.ComicsComParser()),
 			Comic(name = "9 Chickweed Lane", url = "http://www.comics.com/9_chickweed_lane/", 
 				parser = comicsComParser.ComicsComParser()),
-			Comic(name = "Sluggy", url = "http://www.sluggy.com", parser = sluggyParser.SluggyParser()),
 			Comic(name = "Ctrl+Alt+Delete", url = "http://www.cad-comic.com/cad/", parser = cadParser.CadParser()),
-			Comic(name = "User Friendly", url = "http://ars.userfriendly.org/cartoons/?id=" + ufDate, 
-				parser = userFriendlyParser.UserFriendlyParser()),
 			Comic(name = "Penny Arcade", url = "http://www.penny-arcade.com/comic/", 
-				parser = pennyArcadeParser.PennyArcadeParser())]
+				parser = pennyArcadeParser.PennyArcadeParser()),
+			Comic(name = "Mutts",
+                  url = "http://www.arcamax.com/mutts", parser = muttsParser.MuttsParser())]
 	
 	def generateRSS(self):
 		#self.fetchImageLocations()
