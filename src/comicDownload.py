@@ -2,6 +2,7 @@ import goComicsParser, mechanize, htmlFetch, PyRSS2Gen, datetime
 import comicsComParser, sluggyParser, cadParser, userFriendlyParser
 import pennyArcadeParser, muttsParser
 import datetime
+import urllib2
 
 class Comic:
 	def __init__(self, name, url, parser):
@@ -44,7 +45,12 @@ class ComicDownload:
 		rssItems = []
 		for comic in self.allComics:
 			comic.parser.reset()
-			html = htmlFetch.GetHtml(comic.url)
+
+			try:
+				html = htmlFetch.GetHtml(comic.url)
+			except urllib2.HTTPError:
+				print "Unable to fetch html for Comic: %s" % (comic.name)
+
 			comic.imageUrl = comic.parser.getImageLocation(html)
 			desc = ("<a href=\"" + 
 				comic.url + "\" target=\"_blank\">Comic Website</a><br/><br/><img src=\"" + comic.imageUrl + "\" />")
@@ -53,6 +59,7 @@ class ComicDownload:
 				link = comic.imageUrl, 
 				description = desc,
 				pubDate = datetime.datetime.now()))
+
 		rss = PyRSS2Gen.RSS2(
 			title = "Comic RSS Feed", 
 			link = "http://www.jamesralexander.com/comics/rss.xml",
