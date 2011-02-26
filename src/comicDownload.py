@@ -38,7 +38,9 @@ class ComicDownload:
 			Comic(name = "Penny Arcade", url = "http://www.penny-arcade.com/comic/", 
 				parser = pennyArcadeParser.PennyArcadeParser()),
 			Comic(name = "Mutts",
-                  url = "http://www.arcamax.com/mutts", parser = muttsParser.MuttsParser())]
+                  url = "http://www.arcamax.com/mutts", parser = muttsParser.MuttsParser()),
+			Comic(name = "The Barn", url = "http://www.comics.com/the_barn", 
+				parser = comicsComParser.ComicsComParser())]
 	
 	def generateRSS(self):
 		#self.fetchImageLocations()
