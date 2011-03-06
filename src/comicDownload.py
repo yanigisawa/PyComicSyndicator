@@ -54,7 +54,7 @@ class ComicDownload:
 				print "    Unable to fetch html for Comic: \"%s\" - Status Code: %s" % (comic.name, e.code)
 				print "    URL: %s" % e.geturl()
 			except urllib2.URLError, e:
-				print "    Unable to fetch html for Comic: \"%s\" - Status Code: %s" % (comic.name, e.code)
+				print "    Unable to fetch html for Comic: \"%s\"" % (comic.name)
 				print "    URL: %s" % e.geturl()
 
 			comic.imageUrl = comic.parser.getImageLocation(html)
