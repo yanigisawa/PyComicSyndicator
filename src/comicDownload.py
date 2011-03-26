@@ -1,7 +1,7 @@
 import goComicsParser, mechanize, htmlFetch, PyRSS2Gen, datetime
 import comicsComParser, sluggyParser, cadParser, userFriendlyParser
 import pennyArcadeParser, muttsParser
-import datetime
+import datetime, time
 import urllib2
 
 class Comic:
@@ -27,25 +27,26 @@ class ComicDownload:
 				parser = goComicsParser.GoComicsParser()),
 			Comic(name = "Heart of the City", url = "http://www.gocomics.com/heartofthecity/", 
 				parser = goComicsParser.GoComicsParser()),
-			Comic(name = "Pearls before Swine", url = "http://www.comics.com/pearls_before_swine/", 
+			Comic(name = "Pearls before Swine", url = "http://comics.com/pearls_before_swine/", 
 				parser = comicsComParser.ComicsComParser()),
-			Comic(name = "Get Fuzzy", url = "http://www.comics.com/get_fuzzy/", 
+			Comic(name = "Get Fuzzy", url = "http://comics.com/get_fuzzy/", 
 				parser = comicsComParser.ComicsComParser()),
-			Comic(name = "Luann", url = "http://www.comics.com/luann/", parser = comicsComParser.ComicsComParser()),
-			Comic(name = "9 Chickweed Lane", url = "http://www.comics.com/9_chickweed_lane/", 
+			Comic(name = "Luann", url = "http://comics.com/luann/", parser = comicsComParser.ComicsComParser()),
+			Comic(name = "9 Chickweed Lane", url = "http://comics.com/9_chickweed_lane/", 
 				parser = comicsComParser.ComicsComParser()),
 			Comic(name = "Ctrl+Alt+Delete", url = "http://www.cad-comic.com/cad/", parser = cadParser.CadParser()),
 			Comic(name = "Penny Arcade", url = "http://www.penny-arcade.com/comic/", 
 				parser = pennyArcadeParser.PennyArcadeParser()),
 			Comic(name = "Mutts",
                   url = "http://www.arcamax.com/mutts", parser = muttsParser.MuttsParser()),
-			Comic(name = "The Barn", url = "http://www.comics.com/the_barn", 
+			Comic(name = "The Barn", url = "http://comics.com/the_barn", 
 				parser = comicsComParser.ComicsComParser())]
 	
 	def generateRSS(self):
 		#self.fetchImageLocations()
 		rssItems = []
 		for comic in self.allComics:
+			time.sleep(2)
 			comic.parser.reset()
 
 			try:
@@ -55,7 +56,7 @@ class ComicDownload:
 				print "    URL: %s" % e.geturl()
 			except urllib2.URLError, e:
 				print "    Unable to fetch html for Comic: \"%s\"" % (comic.name)
-				print "    URL: %s" % e.geturl()
+				print "    URL: %s" % comic.url
 
 			comic.imageUrl = comic.parser.getImageLocation(html)
 			desc = ("<a href=\"" + 
