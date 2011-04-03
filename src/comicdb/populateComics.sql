@@ -1,0 +1,14 @@
+INSERT INTO Comic(Name, Url, ParserConstructor, IsActive) VALUES('Pibgorn', 'http://www.gocomics.com/pibgorn', 'GoComicsParser()', 1);
+INSERT INTO Comic(Name, Url, ParserConstructor, IsActive) VALUES('Non Sequitur', 'http://www.gocomics.com/nonsequitur/', 'GoComicsParser()', 1);
+INSERT INTO Comic(Name, Url, ParserConstructor, IsActive) VALUES('For Better Or for Worse', 'http://www.gocomics.com/forbetterorforworse/', 'GoComicsParser()', 1);
+INSERT INTO Comic(Name, Url, ParserConstructor, IsActive) VALUES('Garfield', 'http://www.gocomics.com/garfield/', 'GoComicsParser()', 1);
+INSERT INTO Comic(Name, Url, ParserConstructor, IsActive) VALUES('Fox Trot', 'http://www.gocomics.com/foxtrot/', 'GoComicsParser()', 1);
+INSERT INTO Comic(Name, Url, ParserConstructor, IsActive) VALUES('Heart of the City', 'http://www.gocomics.com/heartofthecity/', 'GoComicsParser()', 1);
+INSERT INTO Comic(Name, Url, ParserConstructor, IsActive) VALUES('Pearls before Swine', 'http://comics.com/pearls_before_swine/', 'ComicsComParser()', 1);
+INSERT INTO Comic(Name, Url, ParserConstructor, IsActive) VALUES('Get Fuzzy', 'http://comics.com/get_fuzzy/', 'ComicsComParser()', 1);
+INSERT INTO Comic(Name, Url, ParserConstructor, IsActive) VALUES('Luann', 'http://comics.com/luann/', 'ComicsComParser()', 1);
+INSERT INTO Comic(Name, Url, ParserConstructor, IsActive) VALUES('9 Chickweed Lane', 'http://comics.com/9_chickweed_lane/', 'ComicsComParser()', 1);
+INSERT INTO Comic(Name, Url, ParserConstructor, IsActive) VALUES('Ctrl_Alt_Delete', 'http://www.cad-comic.com/cad/', 'CadParser()', 1);
+INSERT INTO Comic(Name, Url, ParserConstructor, IsActive) VALUES('Penny Arcade', 'http://www.penny-arcade.com/comic/', 'PennyArcadeParser()', 1);
+INSERT INTO Comic(Name, Url, ParserConstructor, IsActive) VALUES('Mutts', 'http://www.arcamax.com/mutts', 'MuttsParser()', 1);
+INSERT INTO Comic(Name, Url, ParserConstructor, IsActive) VALUES('The Barn', 'http://comics.com/the_barn', 'ComicsComParser()', 1);
