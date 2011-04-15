@@ -1,4 +1,4 @@
-import mechanize, htmlFetch, PyRSS2Gen, datetime
+import mechanize, htmlFetch, datetime
 from parsers import *
 import time, urllib2
 from django.conf import settings
@@ -45,12 +45,12 @@ def fetchComicImageUrls():
 		log = ComicLog()
 		log.ImageUrl = parser.getImageLocation(html)
 		log.ComicId = comic
-		log.FetchDate = datetime.datetime.now()
+		log.FetchDate = datetime.datetime.utcnow()
 		log.save()
 
 		currentRss = getCurrentRss(comic.id)
 
-		if (prevLog != None and prevLog.ImageUrl != log.ImageUrl) or currentRss == None:
+		if (prevLog != None and prevLog.ImageUrl != log.ImageUrl and log.ImageUrl != "") or currentRss == None:
 			log = getLatestComicLog(comic.id)
 			rss = ComicRss()
 			rss.ComicLogId = log

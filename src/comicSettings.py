@@ -1,4 +1,7 @@
 from django.conf import settings
+import os
+
+os.environ['TZ'] = "US/Eastern"
 
 settings.configure(DEBUG=True, TEMPLATE_DEBUG=True,
 	DATABASES = {
