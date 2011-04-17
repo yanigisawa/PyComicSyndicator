@@ -50,7 +50,8 @@ def fetchComicImageUrls():
 
 		currentRss = getCurrentRss(comic.id)
 
-		if (prevLog != None and prevLog.ImageUrl != log.ImageUrl and log.ImageUrl != "") or currentRss == None:
+		if (prevLog != None and prevLog.ImageUrl != log.ImageUrl and prevLog.FetchDate.date() != log.FetchDate.date()
+				and log.ImageUrl != "") or currentRss == None:
 			log = getLatestComicLog(comic.id)
 			rss = ComicRss()
 			rss.ComicLogId = log
