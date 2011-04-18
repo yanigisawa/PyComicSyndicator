@@ -49,8 +49,10 @@ def fetchComicImageUrls():
 		log.save()
 
 		currentRss = getCurrentRss(comic.id)
+		foundUrlsToday = ComicLog.objects.filter(FetchDate__gte=datetime.datetime.utcnow().date(), 
+				ComicId=comic.id).values('ImageUrl').distinct().count()
 
-		if (prevLog != None and prevLog.ImageUrl != log.ImageUrl and prevLog.FetchDate.date() != log.FetchDate.date()
+		if (prevLog != None and prevLog.ImageUrl != log.ImageUrl and foundUrlsToday <= 1
 				and log.ImageUrl != "") or currentRss == None:
 			log = getLatestComicLog(comic.id)
 			rss = ComicRss()
