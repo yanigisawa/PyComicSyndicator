@@ -23,13 +23,14 @@ def getCurrentRss(id):
 	
 
 def getHtml(comic):
+	html = ""
 	try:
 		html = htmlFetch.GetHtml(comic.Url)
 	except urllib2.HTTPError, e:
-		print "    Unable to fetch html for Comic: \"%s\" - Status Code: %s" % (comic.Name, e.code)
+		print "    Unable to fetch html for Comic: \"%s\" - HTTPCode: %s" % (comic.Name, e.code)
 		print "    URL: %s" % e.geturl()
 	except urllib2.URLError, e:
-		print "    Unable to fetch html for Comic: \"%s\"" % (comic.Name)
+		print "    Unable to fetch html for Comic: \"%s\" - UrlErrorReason: %s" % (comic.Name, e.reason)
 		print "    URL: %s" % comic.Url
 	return html
 
@@ -42,6 +43,9 @@ def fetchComicImageUrls():
 		html = getHtml(comic)
 		prevLog = getLatestComicLog(comic.id)
 
+		foundUrlsToday = ComicLog.objects.filter(FetchDate__gte=datetime.datetime.utcnow().date(), 
+				ComicId=comic.id).values('ImageUrl').distinct().count()
+
 		log = ComicLog()
 		log.ImageUrl = parser.getImageLocation(html)
 		log.ComicId = comic
@@ -49,8 +53,6 @@ def fetchComicImageUrls():
 		log.save()
 
 		currentRss = getCurrentRss(comic.id)
-		foundUrlsToday = ComicLog.objects.filter(FetchDate__gte=datetime.datetime.utcnow().date(), 
-				ComicId=comic.id).values('ImageUrl').distinct().count()
 
 		if (prevLog != None and prevLog.ImageUrl != log.ImageUrl and foundUrlsToday <= 1
 				and log.ImageUrl != "") or currentRss == None:
