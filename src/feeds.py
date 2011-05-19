@@ -15,7 +15,7 @@ def main():
 	printHeaders()
 	print "<html><body><table border=1 cellpadding=2 cellspacing=2> \
 		<thead><tr><td>Comic Name</td><td>Comic Url</td><td>Comic Rss</td></tr>"
-	for comic in Comic.objects.all().order_by("Name"):
+	for comic in Comic.objects.filter(IsActive=True).order_by("Name"):
 		print "<tr><td>%s</td><td><a href=\"%s\" target=\"_blank\">%s</td><td><a href=\"http://jamesralexander.com/comics/%s/\" \
 			target=\"_blank\">%s</a></td></tr>" % \
 			(comic.Name, comic.Url, comic.Url, comic.Name, comic.Name)
