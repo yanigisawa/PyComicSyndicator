@@ -50,7 +50,10 @@ def fetchComicImageUrls():
 		log.ImageUrl = parser.getImageLocation(html)
 		log.ComicId = comic
 		log.FetchDate = datetime.datetime.utcnow()
-		log.save()
+		if log.ImageUrl != "":
+			log.save()
+		else:
+			print "Unable to find image for Comic - %s" % comic.Name
 
 		currentRss = getCurrentRss(comic.id)
 
