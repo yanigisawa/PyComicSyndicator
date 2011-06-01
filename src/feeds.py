@@ -20,6 +20,6 @@ def main():
 			target=\"_blank\">%s</a></td></tr>" % \
 			(comic.Name, comic.Url, comic.Url, comic.Name, comic.Name)
 	
-	print "</table></body></html"
+	print "</table></body></html>"
 
 main()
