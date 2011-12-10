@@ -80,8 +80,17 @@ def fetchComicImageUrls():
             rss.ComicLogId = log
             rss.save()
 
+def clearOldLogs():
+    twoweeks = datetime.timedelta(days=14)
+    twoWeeksAgo = datetime.datetime.now() - twoweeks
+    oldLogs = ComicLog.objects.filter(FetchDate__lte=twoWeeksAgo)
+    for cl in oldLogs:
+        rssItems = ComicRss.objects.filter(ComicLogId=cl.id)
+        if len(rssItems) == 0:
+            cl.delete()
 
 def main():
     fetchComicImageUrls()
+    clearOldLogs()
 
 main()
