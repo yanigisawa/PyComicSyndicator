@@ -26,7 +26,7 @@ def getHtml(comic):
     html = ""
     count = 0
     while html == "" and count < 4:
-        time.sleep(1)
+        time.sleep(0.5)
         try:
             html = htmlFetch.GetHtml(comic.Url)
         except urllib2.HTTPError, e:
@@ -81,13 +81,26 @@ def fetchComicImageUrls():
             rss.save()
 
 def clearOldLogs():
-    twoweeks = datetime.timedelta(days=14)
-    twoWeeksAgo = datetime.datetime.now() - twoweeks
-    oldLogs = ComicLog.objects.filter(FetchDate__lte=twoWeeksAgo)
+    oldLogs = ComicLog.objects.all()
     for cl in oldLogs:
         rssItems = ComicRss.objects.filter(ComicLogId=cl.id)
-        if len(rssItems) == 0:
+        if rssItems.count() == 0:
             cl.delete()
+
+    comics = Comic.objects.all()
+    for c in comics:
+        logList = ComicLog.objects.filter(ComicId=c.id)
+        while logList.count() > 100:
+            oldestLog = ComicLog.objects.filter(ComicId=c.id).order_by('FetchDate')
+            for cl in oldestLog:
+                rssItems = ComicRss.objects.filter(ComicLogId=cl.id)
+                if rssItems.count() > 0:
+                    for rss in rssItems:
+                        rss.delete()
+                cl.delete()
+                break
+
+
 
 def main():
     fetchComicImageUrls()
