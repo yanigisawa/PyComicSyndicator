@@ -1,0 +1,5 @@
+RewriteEngine on
+
+DirectoryIndex feeds.py 
+RewriteRule ^([^/\.]+)/all?$ all.py?name=$1 
+RewriteRule ^([^/\.]+)/?$ feed.py?name=$1 [L]
