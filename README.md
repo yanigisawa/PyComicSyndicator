@@ -24,6 +24,6 @@ or just manually copy the file into the src directory to be included by Python
 
 There are two composite parts to the comic syndicator
 
-1. A scheduled task that fetches the URL of the comic for that day
-2. A generated RSS feed that can be subscribed to by a syndication reader, like Google Reader.
+1. A scheduled task that fetches the URL of the comic for that day (the comicDownload.py script)
+2. A generated RSS feed that can be subscribed to by a syndication reader, like Google Reader. All the feeds are viewable from the feeds.py page
 
