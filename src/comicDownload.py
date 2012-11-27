@@ -95,12 +95,19 @@ def clearOldLogs():
             for cl in oldestLog:
                 rssItems = ComicRss.objects.filter(ComicLogId=cl.id)
                 if rssItems.count() > 0:
+                    comicLogArchive = ComicLogArchive()
+                    comicLogArchive.ComicId = cl.ComicId
+                    comicLogArchive.ImageUrl = cl.ImageUrl
+                    comicLogArchive.FetchDate = cl.FetchDate
+                    comicLogArchive.save()
+
                     for rss in rssItems:
+                        rssArchive = ComicRssArchive()
+                        rssArchive.ComicLogId = ComicLogArchive.objects.filter(ComicId=cl.ComicId).order_by('FetchDate')[:1].get()
+                        rssArchive.save()
                         rss.delete()
                 cl.delete()
                 break
-
-
 
 def main():
     fetchComicImageUrls()

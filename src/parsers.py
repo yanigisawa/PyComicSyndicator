@@ -56,7 +56,7 @@ class GoComicsParser(SGMLParser):
 		for k, v in attrs:
 			if k == "src":
 				src = v
-			if src.find("cdn.svcs") > -1:
+			if src.find("assets.amuniversal.com") > -1:
 				self.comicFound = True
 				self.img = src
 				

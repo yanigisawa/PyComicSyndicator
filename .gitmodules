@@ -1,0 +1,6 @@
+[submodule "mechanize"]
+	path = mechanize
+	url = git://github.com/jjlee/mechanize.git
+[submodule "django"]
+	path = django
+	url = https://github.com/django/django.git
