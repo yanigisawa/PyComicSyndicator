@@ -35,7 +35,10 @@ def main():
 
     print ("<ul>")
     desc = ""
-    for rss in ComicRss.objects.filter(ComicLogId__ComicId__Name=comicName).order_by("-ComicLogId__FetchDate"):
+    mainRssList = list(ComicRss.objects.filter(ComicLogId__ComicId__Name=comicName).order_by("-ComicLogId__FetchDate"))
+    archiveRss = ComicRssArchive.objects.filter(ComicLogId__ComicId__Name=comicName).order_by("-ComicLogId__FetchDate")
+    mainRssList.extend(list(archiveRss))
+    for rss in mainRssList:
         rssTitle = rss.ComicLogId.ComicId.Name
         utc_zone = zoneinfo.gettz('UTC')
         est_zone = zoneinfo.gettz('US/Eastern')
