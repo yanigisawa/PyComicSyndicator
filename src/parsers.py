@@ -160,9 +160,8 @@ class QuestionableContentParser(SGMLParser):
             return
         for k, v in attrs:
             src = ""
-            if self.comicFound and k == "src":
+            if self.comicFound and v.find("comics") > -1:
                 self.img = v
-            if k == "id" and v == "strip":
                 self.comicFound = True
                 
     def getImageLocation(self, html):
