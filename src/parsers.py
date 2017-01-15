@@ -84,7 +84,7 @@ class MuttsParser(SGMLParser):
     def getImageLocation(self, html):
         self.feed(html)
         self.close()
-        return self.img
+        return "http://www.arcamax.com/" + self.img
         
 class PennyArcadeParser(SGMLParser):
     def reset(self):
