@@ -1,25 +1,24 @@
 from sgmllib import SGMLParser
 
 class CadParser(SGMLParser):
-    def reset(self):
+	def reset(self):
         SGMLParser.reset(self)
         self.img = ""
         self.comicFound = False
+        self.imgFound = False
     def start_img(self, attrs):
         src = ""
         if self.comicFound:
             return
         for k, v in attrs:
-            if k == "src":
-                src = v
-            if src.find("comics/") > -1:
+            if k == "class" and v == "comic-display":
+                self.imgFound = True
+            if self.imgFound && k == "src":
                 self.comicFound = True
-                self.img = src
-                
-    def getImageLocation(self, html):
-        self.feed(html)
-        self.close()
-        return self.img
+                self.img = v 
+
+
+
 
 class ComicsComParser(SGMLParser):
     def reset(self):
