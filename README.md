@@ -1,26 +1,26 @@
 This is a collection of scripts that will scrape popular web comic sites and will combine the links to the
 comic image into a single xml file that can be put into an RSS Reader like google reader.
 
-##REQUIREMENTS:
+## REQUIREMENTS:
 
 There are two python libraries required to run this script. One
 that is used to help with parsing the html, and one that generates
 the rss xml.
 
-##HTML Parsing: 
+## HTML Parsing: 
 
 Mechanize: http://wwwsearch.sourceforge.net/mechanize/
 To include in this script, either run the python setup.p install script
 or just manually add the mechanize/ directory in the src/ directory
 below so that it can be included automatically by Python
 
-##RSS Xml generation: 
+## RSS Xml generation: 
 
 PyRSS2Gen: http://www.dalkescientific.com/Python/PyRSS2Gen.html
 This is a single python file that again be inclued via the setup.py script,
 or just manually copy the file into the src directory to be included by Python
 
-##COMPOSITES
+## COMPOSITES
 
 There are two composite parts to the comic syndicator
 
